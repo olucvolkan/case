@@ -22,14 +22,14 @@ class HomeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_home_detail')]
-    public function getHomeDetail(int $id)
+    public function getHomeDetail(int $id):JsonResponse
     {
         $home = $this->homeService->getHomeDetail($id);
 
         return $this->json([
             'payload' => [
                 'home' => $home
-            ]
-        ]);
+            ]],
+        );
     }
 }

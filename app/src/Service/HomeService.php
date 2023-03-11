@@ -21,11 +21,11 @@ class HomeService
 
     /**
      * @param int $homeId
-     * @return Home[]
+     * @return Home
      */
-    public function getHomeDetail(int $homeId): array
+    public function getHomeDetail(int $homeId): Home
     {
-        return $this->homeRepository->findBy(['id' =>$homeId]);
+        return $this->homeRepository->findOneBy(['id' =>$homeId]);
     }
 
 }
