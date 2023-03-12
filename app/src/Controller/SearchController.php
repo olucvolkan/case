@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\DTO\Request\SearchRequestSchema;
 use App\Service\SearchService;
-use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +30,7 @@ class SearchController extends AbstractController
         $searchRequestSchema = new SearchRequestSchema();
         $searchRequestSchema->setCheckInDate($request->get('checkInDate'));
         $searchRequestSchema->setCheckOutDate($request->get('checkOutDate'));
+
 
         $searchResult = $this->searchService->search($searchRequestSchema);
         return $this->json([

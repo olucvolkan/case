@@ -6,9 +6,10 @@ use App\Repository\HomeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\ArrayShape;
 
 #[ORM\Entity(repositoryClass: HomeRepository::class)]
-class Home
+class Home implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -146,5 +147,16 @@ class Home
         }
 
         return $this;
+    }
+
+    #[ArrayShape(['id' => "int|null", 'name' => "null|string", 'description' => "null|string", 'location' => "null|string", 'address' => "null|string"])] public function jsonSerialize():array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'location' => $this->getLocation(),
+            'address' => $this->getAddress(),
+        ];
     }
 }

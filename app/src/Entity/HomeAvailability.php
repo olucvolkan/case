@@ -5,9 +5,10 @@ namespace App\Entity;
 use App\Repository\HomeAvailabilityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\ArrayShape;
 
 #[ORM\Entity(repositoryClass: HomeAvailabilityRepository::class)]
-class HomeAvailability
+class HomeAvailability implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -93,5 +94,18 @@ class HomeAvailability
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    #[ArrayShape(['id' => "int|null", 'home' => "int|null", 'fromDate' => "\DateTimeInterface|null", 'toDate' => "\DateTimeInterface|null"])] public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'home' => [
+                'id' => $this->getHome()->getId(),
+                'name' => $this->getHome()->getName()
+            ],
+            'fromDate' => $this->getFromDate(),
+            'toDate' => $this->getToDate(),
+        ];
     }
 }

@@ -3,11 +3,15 @@
 
 namespace App\DTO\Request;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 class SearchRequestSchema
 {
+    #[Assert\NotBlank]
     public string $checkInDate;
 
+    #[Assert\NotBlank]
     public string $checkOutDate;
 
     /**

@@ -8,15 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HomeControllerTest extends WebTestCase
 {
-    public function testSomething(): void
+    public function testHomeDetailEndpoint(): void
     {
         $client = static::createClient();
         $client->request('GET', '/home/1');
 
         $response = json_decode($client->getResponse()->getContent());
         $this->assertNotEmpty($response->payload->home);
-        $this->assertIsArray($response->payload->home);
-        $home = $response->payload->home[0];
+        $home = $response->payload->home;
         $this->assertEquals(1, $home->id);
     }
 }

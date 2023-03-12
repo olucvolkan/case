@@ -23,7 +23,7 @@ class HomeService
      * @param int $homeId
      * @return Home
      */
-    public function getHomeDetail(int $homeId): Home
+    public function getHomeDetail(int $homeId):Home
     {
         return $this->homeRepository->findOneBy(['id' =>$homeId]);
     }
